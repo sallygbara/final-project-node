@@ -1,4 +1,4 @@
-import corsMiddlware, { CorsOptions } from "cors";
+import corsMiddleware, { CorsOptions } from "cors";
 import { HttpError } from "../error/custom-error";
 
 const allowedOrigins = [
@@ -6,6 +6,7 @@ const allowedOrigins = [
     "https://admin.exmple.com",
     "http://localhost:3000",
     "http://localhost:5173",
+    "http://localhost:5174",
 ];
 
 const allowedHeaders = [
@@ -17,7 +18,6 @@ const allowedHeaders = [
 
 export const corsOptions: CorsOptions = {
     origin: function (origin, callback) {
-        // !origin means like postman which dont have any origin
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
@@ -25,8 +25,8 @@ export const corsOptions: CorsOptions = {
         }
     },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: allowedHeaders,
+    allowedHeaders,
     credentials: true,
 };
 
-export const cors = corsMiddlware(corsOptions);
+export const cors = corsMiddleware(corsOptions);
