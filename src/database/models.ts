@@ -7,10 +7,31 @@ const userSchema = new mongoose.Schema({
         last: String,
     },
     phone: String,
-    email: String,
+    email: {
+        type: String,
+        unique: true,
+    },
     password: String,
-    isBusiness: Boolean,
-    isAdmin: Boolean,
+    image: {
+        url: String,
+        alt: String,
+    },
+    address: {
+        state: String,
+        country: String,
+        city: String,
+        street: String,
+        houseNumber: Number,
+        zip: Number,
+    },
+    isBusiness: {
+        type: Boolean,
+        default: false,
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 const cardSchema = new mongoose.Schema({
@@ -34,10 +55,7 @@ const cardSchema = new mongoose.Schema({
     },
     bizNumber: Number,
     likes: [String],
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    },
+    user_id: String,
 });
 
 export const User = mongoose.model("User", userSchema);

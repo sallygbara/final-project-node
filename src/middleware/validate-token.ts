@@ -9,7 +9,7 @@ const extractToken = (req: Request) => {
     if (
         authHeader &&
         authHeader.length > 7 &&
-        authHeader.toLocaleLowerCase().startsWith("bearer ")
+        authHeader.toLowerCase().startsWith("bearer ")
     ) {
         return authHeader.substring(7);
     }
@@ -18,9 +18,8 @@ const extractToken = (req: Request) => {
 };
 
 const validateToken: RequestHandler = async (req, res, next) => {
-    const token = extractToken(req);
+    const { email } = authService.verifyJWT(extractToken(req));
 
-    const { email } = await authService.verifyJWT(token);
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -28,7 +27,6 @@ const validateToken: RequestHandler = async (req, res, next) => {
     }
 
     req.user = user;
-
     next();
 };
 

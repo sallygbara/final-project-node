@@ -1,3 +1,3 @@
-export * from "./auth.service.js";
-export * from "./users.service.js";
-export * from "./cards.service.js";
+export { default as authService } from "./auth.service";
+export { default as usersService } from "./users.service";
+export { default as cardsService } from "./cards.service";

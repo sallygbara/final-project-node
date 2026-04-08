@@ -29,6 +29,25 @@ class UsersService {
     async getAllUsers() {
         return User.find();
     }
+    async getUserById(id: string) {
+        return User.findById(id);
+    }
+
+    async updateUser(id: string, data: any) {
+        return User.findByIdAndUpdate(id, data, { new: true });
+    }
+
+    async changeBusinessStatus(id: string) {
+        const user = await User.findById(id);
+        if (!user) return null;
+
+        user.isBusiness = !user.isBusiness;
+        return user.save();
+    }
+
+    async deleteUser(id: string) {
+        return User.findByIdAndDelete(id);
+    }
 }
 
 export default new UsersService();
