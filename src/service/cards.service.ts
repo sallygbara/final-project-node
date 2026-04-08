@@ -1,5 +1,4 @@
-import {Card } from "../database/models.js";
-
+import { Card } from "../database/models.js";
 class CardsService {
     async getAllCards() {
         return Card.find();
@@ -26,14 +25,17 @@ class CardsService {
         const card = await Card.findById(id);
         if (!card) throw new Error("Card not found");
 
-        const liked = card.likes.includes(userId);
+        const likes = (card as any).likes as string[];
+
+        const liked = likes.includes(userId);
 
         if (liked) {
-            card.likes = card.likes.filter(
-                (likedUserId: string) => likedUserId !== userId
+            (card as any).likes = likes.filter(
+                (likedUserId) => likedUserId !== userId
             );
         } else {
-            card.likes.push(userId);
+            likes.push(userId);
+            (card as any).likes = likes;
         }
 
         return card.save();

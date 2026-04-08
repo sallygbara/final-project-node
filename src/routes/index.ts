@@ -1,2 +1,2 @@
-export { usersRouter } from "./users";
-export { cardsRouter } from "./cards";
+export { default as usersRouter } from "./users.js";
+export { default as cardsRouter } from "./cards.js";

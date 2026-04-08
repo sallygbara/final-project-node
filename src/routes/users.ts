@@ -52,4 +52,5 @@ router.delete("/:id", isOwnerOrAdmin, async (req, res) => {
 });
 
 export { router as usersRouter };
+export default router;
 

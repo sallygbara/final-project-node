@@ -1,9 +1,13 @@
+import dotenv from "dotenv";
+
+dotenv.config();
+
+console.log("MONGO_URI =", process.env.MONGO_URI);
+
 const env = {
+    MONGO_URI: process.env.MONGO_URI,
     LOG_LEVEL: process.env.LOG_LEVEL || "info",
-    PORT: process.env.PORT || 3000,
-    DB_CONNECTION_STRING: process.env.DB_CONNECTION_STRING || "",
-    JWT_SECRET: process.env.JWT_SECRET || "",
-    CLIENT_URL: process.env.CLIENT_URL || "http://localhost:5174",
+    JWT_SECRET: process.env.JWT_SECRET || "secret",
 };
 
 export default env;

@@ -1,27 +1,23 @@
 import express from "express";
-import { connectDB } from "./database/index.js";
-import { usersRouter, cardsRouter } from "./routes/index.js";
-import {
-    errorHandler,
-    notFound,
-    cors,
-} from "./middleware/index.js";
-import { httpLogger, logger } from "./logs/index.js";
+import connectDB from "./database/connect-db.js";
+import initDB from "./database/init-db.js";
+import * as routes from "./routes/index.js";
+import { httpLogger } from "./logs/logger";
 
 const app = express();
 
-connectDB();
-
 app.use(express.json());
-app.use(httpLogger);
-app.use(cors);
 
-app.use("/users", usersRouter);
-app.use("/cards", cardsRouter);
+const startServer = async () => {
+    await connectDB();
+    await initDB();
 
-app.use(notFound);
-app.use(errorHandler);
+    app.use("/users", routes.usersRouter);
+    app.use("/cards", routes.cardsRouter);
 
-app.listen(3000, () => {
-    logger.info("Server running on 3000");
-});
+    app.listen(3000, () => {
+        console.log("Server running on port 3000");
+    });
+};
+
+startServer();

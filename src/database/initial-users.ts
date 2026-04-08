@@ -1,26 +1,49 @@
-export const initialUsers = [
+const initialUsers = [
     {
-        name: {
-            first: "Admin",
-            middle: "",
-            last: "User",
-        },
-        phone: "0501234567",
-        email: "admin@gmail.com",
+        name: { first: "Regular", last: "User" },
+        phone: "0500000000",
+        email: "user@gmail.com",
         password: "123456",
-        image: {
-            url: "",
-            alt: "",
-        },
+        image: { url: "", alt: "" },
         address: {
-            state: "Israel",
+            country: "Israel",
+            city: "Tel Aviv",
+            street: "Main",
+            houseNumber: 1,
+        },
+        isBusiness: false,
+        isAdmin: false,
+    },
+    {
+        name: { first: "Business", last: "User" },
+        phone: "0500000001",
+        email: "business@gmail.com",
+        password: "123456",
+        image: { url: "", alt: "" },
+        address: {
             country: "Israel",
             city: "Haifa",
-            street: "Herzl",
-            houseNumber: 10,
-            zip: 12345,
+            street: "Main",
+            houseNumber: 2,
+        },
+        isBusiness: true,
+        isAdmin: false,
+    },
+    {
+        name: { first: "Admin", last: "User" },
+        phone: "0500000002",
+        email: "admin@gmail.com",
+        password: "123456",
+        image: { url: "", alt: "" },
+        address: {
+            country: "Israel",
+            city: "Jerusalem",
+            street: "Main",
+            houseNumber: 3,
         },
         isBusiness: true,
         isAdmin: true,
     },
 ];
+
+export default initialUsers;
