@@ -1,9 +1,11 @@
+import bcrypt from "bcryptjs";
+
 const initialUsers = [
     {
         name: { first: "Regular", last: "User" },
         phone: "0500000000",
         email: "user@gmail.com",
-        password: "123456",
+        password: bcrypt.hashSync("123456", 10),
         image: { url: "", alt: "" },
         address: {
             country: "Israel",
@@ -18,7 +20,7 @@ const initialUsers = [
         name: { first: "Business", last: "User" },
         phone: "0500000001",
         email: "business@gmail.com",
-        password: "123456",
+        password: bcrypt.hashSync("123456", 10),
         image: { url: "", alt: "" },
         address: {
             country: "Israel",
@@ -33,7 +35,7 @@ const initialUsers = [
         name: { first: "Admin", last: "User" },
         phone: "0500000002",
         email: "admin@gmail.com",
-        password: "123456",
+        password: bcrypt.hashSync("123456", 10),
         image: { url: "", alt: "" },
         address: {
             country: "Israel",
