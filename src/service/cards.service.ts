@@ -1,4 +1,5 @@
-import { Card } from "../database/models.js";
+import Card from "../models/card";
+
 class CardsService {
     async getAllCards() {
         return Card.find();
@@ -17,32 +18,39 @@ class CardsService {
         return Card.create(data);
     }
 
-    async updateCard(id: string, data: any) {
-        return Card.findByIdAndUpdate(id, data, { new: true });
+    async updateCard(id: string, data: any, userId: string) {
+        return Card.findOneAndUpdate(
+            { _id: id, user_id: userId },
+            data,
+            { new: true }
+        );
     }
 
     async likeCard(id: string, userId: string) {
         const card = await Card.findById(id);
-        if (!card) throw new Error("Card not found");
 
-        const likes = (card as any).likes as string[];
+        if (!card) {
+            throw new Error("Card not found");
+        }
 
-        const liked = likes.includes(userId);
+        const likes = card.likes.map((like: any) => like.toString());
 
-        if (liked) {
-            (card as any).likes = likes.filter(
-                (likedUserId) => likedUserId !== userId
+        if (likes.includes(userId)) {
+            card.likes = card.likes.filter(
+                (like: any) => like.toString() !== userId
             );
         } else {
-            likes.push(userId);
-            (card as any).likes = likes;
+            card.likes.push(userId as any);
         }
 
         return card.save();
     }
 
-    async deleteCard(id: string) {
-        return Card.findByIdAndDelete(id);
+    async deleteCard(id: string, userId: string) {
+        return Card.findOneAndDelete({
+            _id: id,
+            user_id: userId,
+        });
     }
 }
 

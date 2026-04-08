@@ -63,7 +63,7 @@ pnpm install
 DB_CONNECTION_STRING=mongodb://localhost:27017/cardsDB
 PORT=3000
 JWT_SECRET=your_secret_key
-CLIENT_URL=http://localhost:5173
+CLIENT_URL=http://localhost:5174
 ```
 
 ### 3) הרצת השרת
